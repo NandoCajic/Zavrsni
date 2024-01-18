@@ -1,0 +1,28 @@
+CREATE TABLE YourTableName (
+    Id BIGINT(255) NOT NULL AUTO_INCREMENT,
+    Korisnik_id BIGINT(255) NOT NULL,
+    Korisnik VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL,
+    Grad VARCHAR(255) CHARACTER SET cp1250 COLLATE cp1250_croatian_ci NOT NULL,
+    Mobitel VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL,
+    Sifra VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL,
+    Date TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    ImeSlika VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL,
+    Slika VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL,
+    PRIMARY KEY (Id),
+    INDEX Korisnik_id (Korisnik_id),
+    INDEX Korisnik (Korisnik),
+    INDEX Grad (Grad),
+    INDEX Mobitel (Mobitel),
+    INDEX Sifra (Sifra),
+    INDEX ImeSlika (ImeSlika),
+    INDEX Slika (Slika),
+);
+
+CREATE TABLE objave (
+    id INT(255) NOT NULL AUTO_INCREMENT,
+    Slika VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL,
+    Naslov VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL,
+    Komentar INT(255) NOT NULL,
+    Datum TIMESTAMP NOT NULL DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP(),
+    PRIMARY KEY (id)
+);
