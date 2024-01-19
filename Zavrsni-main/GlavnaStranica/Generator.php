@@ -118,12 +118,13 @@ header::before {
 }
     footer {
       text-align: center;
-      padding: 20px;
+      padding: 2px;
       background-color: #111;
       color: #777;
       position: fixed;
       bottom: 0;
       width: 60%;
+      height:5%;
     }
 /* Nešto */
   .socket {

@@ -3,9 +3,11 @@
   session_start();
   include("../Login/Spajanje.php");
   include("../Login/Funkcije.php");
+  $user_data = check_login($con);
+  $user_data['ImeSlika']; 
 // Korisnik je prijavljen, prikaži gumb za dodavanje objave
   if (isset($_SESSION['Korisnik_id'])) {
-  
+     
     echo '<button id="btn1">Dodaj objavu
     <span class="first"></span>
     <span class="second"></span>
@@ -24,7 +26,13 @@
     <span class="third"></span>
     <span class="fourth"></span></button>';
   }
-
+  if (!empty($user_data['ImeSlika'])) {
+    $profilePicture = "Profilne/" . $user_data['ImeSlika'];
+  }  
+  else {
+    // If no profile picture, use a default image
+    $profilePicture = "Profilne/user1.png"; // Adjust the path to your default image
+  }
 
 
 ?>
@@ -1134,7 +1142,7 @@
             </ul>
      
         <li class='dropdown'>
-        <a href='javascript:void(0)' class='dropbtn'><img class="Icona" src='Slike/User/user1.png' alt='Account'></a>
+        <a href='javascript:void(0)' class='dropbtn'><img class="Icona" src='<?php echo $profilePicture; ?>' alt='Account'></a>
             <div class='dropdown-content'>
             <?php 
           // Ako korisnik nije prijavljen, prikaži poruku i opciju za prijavu/registraciju  

@@ -3,6 +3,15 @@
   session_start();
   include("../Login/Spajanje.php");
   include("../Login/Funkcije.php");
+  $user_data = check_login($con);
+  $user_data['ImeSlika']; // New field to store the filename of the profile picture
+  if (!empty($user_data['ImeSlika'])) {
+    $profilePicture = "Profilne/" . $user_data['ImeSlika'];
+  }  
+  else {
+    // If no profile picture, use a default image
+    $profilePicture = "Profilne/user1.png"; // Adjust the path to your default image
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -527,7 +536,7 @@
             </ul>
      
         <li class='dropdown'>
-        <a href='javascript:void(0)' class='dropbtn'><img class="Icona" src='Slike/User/user1.png' alt='Account'></a>
+        <a href='javascript:void(0)' class='dropbtn'><img class="Icona" src='<?php echo $profilePicture; ?>' alt='Account'></a>
             <div class='dropdown-content'>
             <?php 
             if (empty($user_data = check_login($con))) {
