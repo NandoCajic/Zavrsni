@@ -1,4 +1,4 @@
-CREATE TABLE YourTableName (
+CREATE TABLE korisnik (
     Id BIGINT(255) NOT NULL AUTO_INCREMENT,
     Korisnik_id BIGINT(255) NOT NULL,
     Korisnik VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE YourTableName (
     INDEX Mobitel (Mobitel),
     INDEX Sifra (Sifra),
     INDEX ImeSlika (ImeSlika),
-    INDEX Slika (Slika),
+    INDEX Slika (Slika)
 );
 
 CREATE TABLE objave (
