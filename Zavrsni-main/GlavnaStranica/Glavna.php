@@ -1118,6 +1118,51 @@
   .dropdown:hover .dropdown-content {
     display: block;
   }
+  .popup-form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    z-index: 1000;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Styles to center the pop-up form */
+.popup-content {
+    text-align: center;
+}
+
+/* Styles for the form */
+.form-group {
+    margin-bottom: 10px;
+}
+
+/* Styles for the button */
+.btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
 </style>
 </head>
 
@@ -1249,62 +1294,29 @@
   </div>
 
 
-  <div id="popup-form">
-  <form class="form">
-      <div class="form-title"><span>Dodaj svoju objavu</span></div>
-        <div class="title-2"><span>Techno Zona</span></div>
-        <div class="input-container">
-          <input class="input-mail" type="text" name="Naslov" placeholder="Dodaj Naslov">
-          <span> </span>
+  <div class="overlay" id="overlay"></div>
+<div class="popup-form" id="popupForm" style="display: none;">
+    <div class="popup-content">
+        <h2>Nova Objava</h2>
+        <div class="form-group">
+            <input type="text" id="title" placeholder="Naslov" required>
         </div>
-
-        <section class="bg-stars">
-          <span class="star"></span>
-          <span class="star"></span>
-          <span class="star"></span>
-          <span class="star"></span>
-        </section>
-
-        <div class="input-container">
-          <input class="input-pwd" name="Komentar" type="textbox" placeholder="Dodaj komentar">
+        <div class="form-group">
+            <textarea id="content" placeholder="Sadržaj" required></textarea>
         </div>
-        
-        <label for="file" class="custum-file-upload">
-        <div class="icon">
-        <svg viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" fill=""></path> </g></svg>
+        <div class="form-group">
+            <button id="submitBtn" class="btn">Dodaj</button>
         </div>
-        <div class="text">
-        <span>Dodaj sliku</span>
-        </div>
-        <input id="file" name="Slika" type="file">
-        </label>
+    </div>
+</div>
 
 
-    </form>
 
 
     </div>
  
 <script>
-//Cili JQuery
-  $(document).ready(function(){
-    //Pop up form apend i open
-      $("#btn2").click(function(){
-        $("ol").append("<li>Appended item</li>");
-      });
-      $("#btn1").click(function () {
-                $("#popup-form").dialog("open");
-                $("#container").append("<div id='container'><div class='card'> <div class='card__header'><img src='https://source.unsplash.com/600x400/?computer' alt='card__image' class='card__image' width='600'></div> <div class='card__body'><span class='tag tag-blue'>Technology</span><h4>What\'s new in 2022 Tech</h4><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi perferendis molestiae non nemo doloribus. Doloremque, nihil! At ea atque quidem!</p></div><div class='card__footer'><div class='user'><img src='https://i.pravatar.cc/40?img=1' alt='user__image' class='user__image'> <div class='user__info'> <?php echo "<h5>" . $user_data['Korisnik'] . "</h5>" ?><small>2h ago</small></div></div></div></div>");
-
-            });
-
-            $("#popup-form").dialog({
-                autoOpen: false,
-                draggable: true,
-            });
-
-    
-  })
+//Cili JS
   document.addEventListener('click', function (event) {
     var dropdowns = document.getElementsByClassName('dropdown-content');
     for (var i = 0; i < dropdowns.length; i++) {
@@ -1315,4 +1327,52 @@
     }
   });
 </script>
+
+<script>
+document.getElementById("btn1").addEventListener("click", function() {
+    document.getElementById("popupForm").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+});
+document.addEventListener("DOMContentLoaded", function() {
+
+// Submit form data
+document.getElementById("submitBtn").addEventListener("click", function() {
+    const title = document.getElementById('title').value;
+    const content = document.getElementById('content').value;
+    const username = document.getElementById('Korisnik').innerText.split(' ')[3];
+    const data = {
+        title: title,
+        content: content,
+        username: username
+    };
+    fetch('Objave.php', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.text())
+    .then(data => {
+        // Check if the response contains an error message
+        if (data.startsWith('Error')) {
+            alert(data); // Display the error message
+        } else {
+            alert(data); // Display success message or any other response
+            // Close the form and overlay
+            document.getElementById("popupForm").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+            // Reload the page to see the updated objave
+            location.reload();
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+    });
+});
+});
+</script>
+
+
 </body>
