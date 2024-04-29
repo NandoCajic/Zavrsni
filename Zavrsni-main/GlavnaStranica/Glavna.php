@@ -8,7 +8,7 @@
 // Korisnik je prijavljen, prikaži gumb za dodavanje objave
   if (isset($_SESSION['Korisnik_id'])) {
      
-    echo '<button id="btn1">Dodaj objavu
+    echo '<button id="btn1"><a href="objave.php">Dodaj objavu</a>
     <span class="first"></span>
     <span class="second"></span>
     <span class="third"></span>
@@ -99,81 +99,87 @@
     display: block;
     object-fit: cover;
   }
-
   .card {
-    display: flex;
-    flex-direction: column;
-    width: clamp(20rem, calc(20rem + 2vw), 22rem);
-    overflow: hidden;
-    box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
-    border-radius: 1em;
-    background: #ECE9E6;
+  display: flex;
+  flex-direction: column;
+  width: clamp(20rem, calc(20rem + 2vw), 22rem);
+  overflow: hidden;
+  box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 1em;
+  background: #ECE9E6;
   background: linear-gradient(to right, #FFFFFF, #ECE9E6);
+  float: left;
+  margin: 20px; /* Add margin to create space between cards */
+}
 
-  }
+.card__body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
 
+.tag {
+  align-self: flex-start;
+  padding: .25em .75em;
+  border-radius: 1em;
+  font-size: .75rem;
+}
 
+.tag + .tag {
+  margin-left: .5em;
+}
 
-  .card__body {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-  }
-
-
-  .tag {
-    align-self: flex-start;
-    padding: .25em .75em;
-    border-radius: 1em;
-    font-size: .75rem;
-  }
-
-  .tag + .tag {
-    margin-left: .5em;
-  }
-
-  .tag-blue {
-    background: #56CCF2;
+.tag-blue {
+  background: #56CCF2;
   background: linear-gradient(to bottom, #c2d9f8, #c5f1ff);
-    color: #fafafa;
-  }
+  color: #fafafa;
+}
 
-  .tag-brown {
-    background: #D1913C;
+.tag-brown {
+  background: #D1913C;
   background: linear-gradient(to bottom, #FFD194, #D1913C);
-    color: #fafafa;
-  }
+  color: #fafafa;
+}
 
-  .tag-red {
-    background: #cb2d3e;
+.tag-red {
+  background: #cb2d3e;
   background: linear-gradient(to bottom, #ef473a, #cb2d3e);
-    color: #fafafa;
-  }
+  color: #fafafa;
+}
 
-  .card__body h4 {
-    font-size: 1.5rem;
-    text-transform: capitalize;
-  }
+.card__body h4 {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+}
 
-  .card__footer {
-    display: flex;
-    padding: 1rem;
-    margin-top: auto;
-  }
+.card__footer {
+  display: flex;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+.user {
+  display: flex;
+  gap: .5rem;
+}
+
+.user__image {
+  border-radius: 50%;
+  width: 40px;
+  height:40px;
+}
+
+.user__info > small {
+  color: #666;
+}
 
   .user {
     display: flex;
     gap: .5rem;
   }
 
-  .user__image {
-    border-radius: 50%;
-  }
 
-  .user__info > small {
-    color: #666;
-  }
 /* Botun za Objave */
   button {
     border: none;
@@ -443,119 +449,10 @@
   }
   
 /* Dizajn Za Formu */
-  .form {
-    position: relative;
-    display: block;
-    padding: 2.2rem;
-    max-width: 350px;
-    background: linear-gradient(14deg, rgba(2,0,36, 0.8) 0%, rgba(24, 24, 65, 0.7) 66%, 
-              rgb(20, 76, 99) 100%), radial-gradient(circle, rgba(2,0,36, 0.5) 0%, 
-              rgba(32, 15, 53, 0.2) 65%, rgba(14, 29, 28, 0.9) 100%);
-    border: 2px solid #fff;
-    -webkit-box-shadow: rgba(0,212,255) 0px 0px 50px -15px;
-    box-shadow: rgba(0,212,255) 0px 0px 50px -15px;
-    overflow: hidden;
-    z-index: +1;
-  }
+ 
 
-  /*------input and submit section-------*/
 
-  .input-container {
-    position: relative;
-  }
-
-  .input-container input, .form button {
-    outline: none;
-    border: 2px solid #ffffff;
-    margin: 8px 0;
-    font-family: monospace;
-  }
-
-  .input-container input {
-    background-color: #fff;
-    padding: 0px;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    width:100%;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  }
-  .input-pwd{
-    height:10%;
-  }
-  .input-mail:focus::placeholder {
-    opacity: 0;
-    transition: opacity .9s;
-  }
-
-  .input-pwd:focus::placeholder {
-    opacity: 0;
-    transition: opacity .9s;
-  }
-
-  .submit {
-    position: relative;
-    display: block;
-    padding: 8px;
-    background-color: #c0c0c0;
-    color: #ffffff;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    font-weight: 500;
-    width: 100%;
-    text-transform: uppercase;
-    overflow: hidden;
-  }
-
-  .submit:hover {
-    -webkit-transition: all 0.2s ease-out;
-    -moz-transition: all 0.2s ease-out;
-    transition: all 0.2s ease-out;
-    border-radius: 3.9px;
-    box-shadow: 4px 5px 17px -4px #ffffff;
-    cursor: pointer;
-  }
-
-  .submit:hover::before {
-    -webkit-animation: sh02 0.5s 0s linear;
-    -moz-animation: sh02 0.5s 0s linear;
-    animation: sh02 .5s 0s linear;
-  }
-
-  .submit::before {
-    content: '';
-    display: block;
-    width: 0px;
-    height: 85%;
-    position: absolute;
-    top: 50%;
-    left: 0%;
-    opacity: 0;
-    background: #fff;
-    box-shadow: 0 0 50px 30px #fff;
-    -webkit-transform: skewX(-20deg);
-    -moz-transform: skewX(-20deg);
-    -ms-transform: skewX(-20deg);
-    -o-transform: skewX(-20deg);
-    transform: skewX(-20deg);
-  }
-
-  @keyframes sh02 {
-    from {
-      opacity: 0;
-      left: 0%;
-    }
-
-    50% {
-      opacity: 1;
-    }
-
-    to {
-      opacity: 0;
-      left: 100%;
-    }
-  }
-
+  
   /*--------signup section---------*/
 
   .signup-link {
@@ -576,218 +473,8 @@
   }
 
 
-  /*--------header section-----------*/
-
-  .form-title {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-family: monospace;
-    font-weight: 600;
-    text-align: center;
-    color: #fff;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
-    animation-duration: 1.5s;
-    overflow: hidden;
-    transition: .12s;
-  }
-
-  .form-title span {
-    animation: flickering 2s linear infinite both;
-  }
-
-  .title-2 {
-    display: block;
-    margin-top: -0.5rem;
-    font-size: 2.1rem;
-    font-weight: 800;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    -webkit-text-stroke: #fff 0.1rem;
-    letter-spacing: 0.2rem;
-    color: transparent;
-    position: relative;
-    text-shadow: 0px 0px 16px #CECECE;
-  }
-
-
-  @keyframes flickering {
-    0%,
-    100% {
-      opacity: 1;
-    }
-
-    41.99% {
-      opacity: 1;
-    }
-
-    42% {
-      opacity: 0;
-    }
-
-    43% {
-      opacity: 0;
-    }
-
-    43.01% {
-      opacity: 1;
-    }
-
-    47.99% {
-      opacity: 1;
-    }
-
-    48% {
-      opacity: 0;
-    }
-
-    49% {
-      opacity: 0;
-    }
-
-    49.01% {
-      opacity: 1;
-    }
-  }
-
-  /*---------shooting stars-----------*/
-
-
-  .bg-stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    background-size: cover;
-    animation: animateBg 50s linear infinite;
-  }
-
-  @keyframes animateBg {
-    0%,100% {
-      transform: scale(1);
-    }
-
-    50% {
-      transform: scale(1.2);
-    }
-  }
-
-  .star {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 4px;
-    height: 4px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 0 0 4px rgba(255,255,255,0.1),0 0 0 8px rgba(255,255,255,0.1),0 0 20px rgba(255,255,255,0.1);
-    animation: animate 3s linear infinite;
-  }
-
-  .star::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 300px;
-    height: 1px;
-    background: linear-gradient(90deg,#fff,transparent);
-  }
-
-  @keyframes animate {
-    0% {
-      transform: rotate(315deg) translateX(0);
-      opacity: 1;
-    }
-
-    70% {
-      opacity: 1;
-    }
-
-    100% {
-      transform: rotate(315deg) translateX(-1000px);
-      opacity: 0;
-    }
-  }
-
-  .star:nth-child(1) {
-    top: 0;
-    right: 0;
-    left: initial;
-    animation-delay: 0s;
-    animation-duration: 1s;
-  }
-
-  .star:nth-child(2) {
-    top: 0;
-    right: 100px;
-    left: initial;
-    animation-delay: 0.2s;
-    animation-duration: 3s;
-  }
-
-  .star:nth-child(3) {
-    top: 0;
-    right: 220px;
-    left: initial;
-    animation-delay: 2.75s;
-    animation-duration: 2.75s;
-  }
-
-  .star:nth-child(4) {
-    top: 0;
-    right: -220px;
-    left: initial;
-    animation-delay: 1.6s;
-    animation-duration: 1.6s;
-  }
-  /* File upload */
-
-
-  .custum-file-upload {
-    height: 200px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: space-between;
-    gap: 20px;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    border: 2px dashed #e8e8e8;
-    background-color: #212121;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0px 48px 35px -48px #e8e8e8;
-  }
-
-  .custum-file-upload .icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .custum-file-upload .icon svg {
-    height: 80px;
-    fill: #e8e8e8;
-  }
-
-  .custum-file-upload .text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .custum-file-upload .text span {
-    font-weight: 400;
-    color: #e8e8e8;
-  }
-
-  .custum-file-upload input {
-    display: none;
-  }
- 
+  
+  
 
 /* Dizajn za sve */
   *{
@@ -1247,64 +934,50 @@
       </div>
     </div>
   </div>
+  <?php
+// Include database connection
+include("../Login/Spajanje.php");
 
+// Query to get last 10 inputs from the database
+$sql = "SELECT * FROM objave ORDER BY ID DESC LIMIT 1";
+$result = $con->query($sql);
 
-  <div id="popup-form">
-  <form class="form">
-      <div class="form-title"><span>Dodaj svoju objavu</span></div>
-        <div class="title-2"><span>Techno Zona</span></div>
-        <div class="input-container">
-          <input class="input-mail" type="text" name="Naslov" placeholder="Dodaj Naslov">
-          <span> </span>
-        </div>
+// Check if there are results
+if ($result->num_rows > 0) {
+    // Output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo '<div class="card">';
+        echo '<div class="card__header">';
+        echo '<img src="uploads/' . $row["Slika"] . '" alt="card__image" class="card__image" width="600">';
+        echo '</div>';
+        echo '<div class="card__body">';
+        echo '<span class="tag tag-blue">' . $row["Naslov"] . '</span>';
+        echo '<h4>' . $row["Naslov"] . '</h4>';
+        echo '<p>' . $row["Komentar"] . '</p>';
+        echo '</div>';
+        echo '<div class="card__footer">';
+        echo '<div class="user">';
+        echo '<img src="Profilne/'. $user_data['ImeSlika'] .'" alt="user__image" class="user__image">';
+        echo '<div class="user__info">';
+        echo '<h5>' . $row["Korisnik"] . '</h5>';
+        echo '<small>' . date("Y-m-d H:i:s", strtotime($row["Datum"])) . '</small>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div><hr>';
+    }
+} else {
+    echo "0 results";
+}
 
-        <section class="bg-stars">
-          <span class="star"></span>
-          <span class="star"></span>
-          <span class="star"></span>
-          <span class="star"></span>
-        </section>
+// Close database connection
+$con->close();
+?>
 
-        <div class="input-container">
-          <input class="input-pwd" name="Komentar" type="textbox" placeholder="Dodaj komentar">
-        </div>
-        
-        <label for="file" class="custum-file-upload">
-        <div class="icon">
-        <svg viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" fill=""></path> </g></svg>
-        </div>
-        <div class="text">
-        <span>Dodaj sliku</span>
-        </div>
-        <input id="file" name="Slika" type="file">
-        </label>
-
-
-    </form>
-
-
-    </div>
  
 <script>
 //Cili JQuery
-  $(document).ready(function(){
-    //Pop up form apend i open
-      $("#btn2").click(function(){
-        $("ol").append("<li>Appended item</li>");
-      });
-      $("#btn1").click(function () {
-                $("#popup-form").dialog("open");
-                $("#container").append("<div id='container'><div class='card'> <div class='card__header'><img src='https://source.unsplash.com/600x400/?computer' alt='card__image' class='card__image' width='600'></div> <div class='card__body'><span class='tag tag-blue'>Technology</span><h4>What\'s new in 2022 Tech</h4><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi perferendis molestiae non nemo doloribus. Doloremque, nihil! At ea atque quidem!</p></div><div class='card__footer'><div class='user'><img src='https://i.pravatar.cc/40?img=1' alt='user__image' class='user__image'> <div class='user__info'> <?php echo "<h5>" . $user_data['Korisnik'] . "</h5>" ?><small>2h ago</small></div></div></div></div>");
-
-            });
-
-            $("#popup-form").dialog({
-                autoOpen: false,
-                draggable: true,
-            });
-
-    
-  })
+ 
   document.addEventListener('click', function (event) {
     var dropdowns = document.getElementsByClassName('dropdown-content');
     for (var i = 0; i < dropdowns.length; i++) {
