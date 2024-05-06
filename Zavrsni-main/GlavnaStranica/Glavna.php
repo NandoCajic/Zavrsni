@@ -823,6 +823,7 @@
             <li><a href="#">Home</a></li>
             <li><a href="Novosti.php">Novosti</a></li>
             <li><a href="Najpopularnije.php">Najpopularnije</a></li>
+            <li><a href="Chat.php">Chat</a></li>
             <!-- <li><a href="#food-menu">Menu</a></li>
             <li><a href="#testimonials">Testimonial</a></li>
             <li><a href="#contact">Contact</a></li> -->
