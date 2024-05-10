@@ -1,55 +1,62 @@
 <!DOCTYPE html>
 <html>
 <?php
-session_start();
-
-include("../Login/Spajanje.php"); // Assuming this file contains the database connection
-include("../Login/Funkcije.php");
-  $user_data = check_login($con);
-  $user_data1 = check_login($con);
-  $user_data1['Korisnik'];
-  $user_data['ImeSlika']; 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check connection
-    if ($con->connect_error) {
-        die("Connection failed: " . $con->connect_error);
-    }
-
-    // Prepare and bind
-    $stmt = $con->prepare("INSERT INTO objave (Korisnik,Profilna,Slika, Naslov, Komentar) VALUES (?, ?, ?, ?, ?)");
+session_start(); 
+ 
+include("../Login/Spajanje.php"); 
+include("../Login/Funkcije.php"); 
+  $user_data = check_login($con); 
+  
+  $user_data['Korisnik']; 
+  $user_data['ImeSlika'];  
+  if (!empty($user_data['ImeSlika'])) {
+    $profilePicture = $user_data['ImeSlika'];
+  }  
+  else {
+    $profilePicture = "user1.png"; 
+  }
+if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+    // Check connection 
+    if ($con->connect_error) { 
+        die("Connection failed: " . $con->connect_error); 
+    } 
+    $komentar = $_POST['Komentar']; 
+    $naslov = $_POST['Naslov']; 
+ 
+    $slika = $_FILES['Slika']['name']; 
+ 
+    // Prepare and bind 
+    $stmt = $con->prepare("INSERT INTO objave (Korisnik,Profilna,Slika, Naslov, Komentar) VALUES (?, ?, ?, ?, ?)"); 
+     
+    if (!$stmt) { 
+        die("Error: " . $con->error);  
+    } 
+ 
+    $stmt->bind_param("sssss", $user_data['Korisnik'], $profilePicture, $slika, $naslov, $komentar); 
+ 
     
-    if (!$stmt) {
-        die("Error: " . $con->error); 
-    }
-
-    $stmt->bind_param("sssss", $user_data1['Korisnik'], $user_data['ImeSlika'], $slika, $naslov, $komentar);
-
-   
-    $naslov = $_POST['Naslov'];
-
-    $slika = $_FILES['Slika']['name'];
-
     
-    $target_dir = "uploads/"; 
-    $target_file = $target_dir . basename($_FILES["Slika"]["name"]);
-
-    if (move_uploaded_file($_FILES["Slika"]["tmp_name"], $target_file)) {
-        echo "The file ". htmlspecialchars( basename( $_FILES["Slika"]["name"])). " has been uploaded.";
-        $komentar = $_POST['Komentar'];
-    } else {
-        echo "Sorry, there was an error uploading your file.";
-    }
-
-    if ($stmt->execute()) {
-        echo "New records created successfully";
-    } else {
-        echo "Error: " . $stmt->error;
-    }
-
-    $stmt->close();
-    $con->close();
-    header("Location: Glavna.php");
-}
+     
+    $target_dir = "uploads/";  
+    $target_file = $target_dir . basename($_FILES["Slika"]["name"]); 
+ 
+    if (move_uploaded_file($_FILES["Slika"]["tmp_name"], $target_file)) { 
+        echo "The file ". htmlspecialchars( basename( $_FILES["Slika"]["name"])). " has been uploaded."; 
+       
+    } else { 
+        echo "Sorry, there was an error uploading your file."; 
+    } 
+ 
+    if ($stmt->execute()) { 
+        echo "New records created successfully"; 
+    } else { 
+        echo "Error: " . $stmt->error; 
+    } 
+ 
+    $stmt->close(); 
+    $con->close(); 
+    header("Location: Glavna.php"); 
+} 
 ?>
 
 <head>
@@ -60,7 +67,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
   <script src='main.js'></script>
   <style>
-     .form {
+/* */
+  .form { 
     position: relative;
     display: block;
     padding: 2.2rem;
@@ -726,7 +734,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </section>
 
       <div class="input-container">
-      <textarea class="input-pwd" name="Komentar" placeholder="Dodaj komentar"></textarea>
+      <textarea class="input-pwd" id="Komentar" name="Komentar" placeholder="Dodaj komentar"></textarea>
       </div>
       
       <label for="file" class="custum-file-upload">

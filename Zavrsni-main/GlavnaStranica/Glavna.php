@@ -1212,7 +1212,7 @@ if ($result->num_rows > 0) {
         echo '</div>';
         echo '<div class="card__footer">';
         echo '<div class="user">';
-        echo '<img style="width:40px;height:40px;" src="Profilne/'. $user_data['ImeSlika'] .'" alt="user__image" class="user__image">';
+        echo '<img style="width:40px;height:40px;" src="Profilne/'. $row["Profilna"].'" alt="user__image" class="user__image">';
         echo '<div class="user__info">';
         echo '<h5>' . $row["Korisnik"] . '</h5>';
         echo '<small>' . date("Y-m-d H:i:s", strtotime($row["Datum"])) . '</small>';

@@ -18,11 +18,28 @@ CREATE TABLE korisnik (
     INDEX Slika (Slika)
 );
 
-CREATE TABLE objave (
-    id INT(255) NOT NULL AUTO_INCREMENT,
+CREATE TABLE messages (
+    id  INT(11) AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(255) CHARACTER SET latin2 COLLATE latin2_croatian_ci,
+    Profilna VARCHAR(255) CHARACTER SET latin2 COLLATE latin2_croatian_ci NOT NULL,
+    message TEXT CHARACTER SET latin2 COLLATE latin2_croatian_ci,
+    timestamp TIMESTAMP DEFAULT current_timestamp()
+);
+CREATE TABLE vjesti (
+    Izvodac VARCHAR(255) CHARACTER SET latin2 COLLATE latin2_croatian_ci NOT NULL,
+    Zanr VARCHAR(255) CHARACTER SET latin2 COLLATE latin2_croatian_ci NOT NULL,
+    Datum DATE NOT NULL,
+    ClubLok VARCHAR(255) CHARACTER SET latin2 COLLATE latin2_croatian_ci NOT NULL,
+    Opis VARCHAR(255) CHARACTER SET latin2 COLLATE latin2_croatian_ci NOT NULL,
+    Lokacija VARCHAR(255) CHARACTER SET latin2 COLLATE latin2_croatian_ci NOT NULL,
+    Cijena INT(255) NOT NULL
+);
+CREATE TABLE objave(
+    id INT(255) AUTO_INCREMENT PRIMARY KEY,
+    Korisnik VARCHAR(255) CHARACTER SET latin2 COLLATE latin2_croatian_ci NOT NULL,
+    Profilna VARCHAR(255) CHARACTER SET latin2 COLLATE latin2_croatian_ci NOT NULL,
     Slika VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL,
     Naslov VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_croatian_ci NOT NULL,
-    Komentar INT(255) NOT NULL,
-    Datum TIMESTAMP NOT NULL DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP(),
-    PRIMARY KEY (id)
+    Komentar VARCHAR(255) CHARACTER SET latin2 COLLATE latin2_croatian_ci NOT NULL,
+    Datum TIMESTAMP DEFAULT current_timestamp() ON UPDATE CURRENT_TIMESTAMP()
 );

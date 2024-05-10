@@ -1,6 +1,40 @@
 
 <!DOCTYPE html>
 <html>
+<?php
+
+session_start(); 
+ 
+include("../Login/Spajanje.php"); 
+include("../Login/Funkcije.php"); 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   
+    $izvodac = $_POST['name'];
+    $datum = date('Y-m-d'); 
+    $clubLok = $_POST['Klub']; 
+    $opis = $_POST['message']; 
+    $lokacija = $_POST['Grad']; 
+    $zanr = $_POST['Zanr'];
+    $cijena = $_POST['Cijena'];
+
+
+    $query = "INSERT INTO vjesti (Izvodac,Zanr, Datum, ClubLok, Opis, Lokacija, Cijena) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($con, $query);
+    mysqli_stmt_bind_param($stmt, "ssssssi", $izvodac,$zanr, $datum, $clubLok, $opis, $lokacija, $cijena);
+    mysqli_stmt_execute($stmt);
+
+    if(mysqli_stmt_affected_rows($stmt) > 0) {
+        echo "Data inserted successfully.";
+    } else {
+        echo "Error inserting data.";
+    }
+
+    mysqli_stmt_close($stmt);
+}
+
+mysqli_close($con);
+?>
 <head>
 <!-- Head Sadržaj -->
   <meta charset='utf-8'>
@@ -92,7 +126,7 @@
             <option value="Makarska">Makarska</option>
         </select>
         <br>
-        <select placeholder="Klub" class="input-field" name="Grad" id="Grad" required>
+        <select placeholder="Klub" class="input-field" name="Klub" id="Klub" required>
             <option value="Outim">Otium</option>
             <option value="Boogaloo">Boogaloo</option>
             <option value="Depo">Depo</option>
@@ -106,8 +140,14 @@
             <option value="Deep">Deep</option>
         </select>
         <br>
-        <label for="message">Zanrovi:</label>
+        <label for="Zanr">Zanrovi:</label>
+        <textarea id="Zanr" name="Zanr" rows="4" required></textarea>
+        <br>
+        <label for="message">Opis:</label>
         <textarea id="message" name="message" rows="4" required></textarea>
+        <br>
+        <label for="Cijena">Cijena:</label>
+        <input id="Cijena" name="Cijena" rows="4" required></input>
         <br>
         <button type="submit">Submit</button>
         </form>

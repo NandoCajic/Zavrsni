@@ -6,7 +6,7 @@ include("../Login/Funkcije.php");
 $user_data = check_login($con); 
 $user_data['ImeSlika']; 
 if (!empty($user_data['ImeSlika'])) {
-  $profilePicture = "Profilne/" . $user_data['ImeSlika'];
+  $profilePicture = $user_data['ImeSlika'];
 }  
 else {
   $profilePicture = "Profilne/user1.png"; 
@@ -23,9 +23,9 @@ function fetchMessages($con, $profilePicture) {
     
     $messages = ""; 
     while ($row = mysqli_fetch_assoc($result)) { 
-        // Retrieve the user's profile picture from the database
+        
         $user_id = $row["user_id"];
-        $profileQuery = "SELECT ImeSlika FROM korisnik WHERE Korisnik = '$user_id'";
+        $profileQuery = "SELECT ImeSlika FROM korisnik WHERE Korisnik_id = '$user_id'";
         $profileResult = mysqli_query($con, $profileQuery);
         
         if (!$profileResult) {
@@ -36,7 +36,7 @@ function fetchMessages($con, $profilePicture) {
         $userProfilePicture = !empty($profileRow['ImeSlika']) ? "Profilne/" . $profileRow['ImeSlika'] : $profilePicture;
         
         $messages .= '<div class="message sol">
-                        <div class="resim" style="background-image: url(\''. $userProfilePicture .'\');"></div>
+                        <div class="resim" style="background-image: url(\''. $userProfilePicture .'\');"><img class="Icona" src="Profilne/'.$row["Profilna"].'" </div></div>
                         <div class="messageContent">
                             <div class="userName">'.$row["user_id"].'</div>
                             <div class="messageText" data-time="10:42">'. $row["message"] .'</div>
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["message"])) {
     $message = $_POST["message"]; 
     $user_id = $user_data['Korisnik']; 
 
-    $query = "INSERT INTO messages (user_id, message) VALUES ('$user_id', '$message')"; 
+    $query = "INSERT INTO messages (user_id,Profilna, message) VALUES ('$user_id','$profilePicture','$message')"; 
     $insertResult = mysqli_query($con, $query);
     
     if (!$insertResult) {
@@ -65,6 +65,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["message"])) {
 <head> 
     <title>Live Chat</title> 
     <style> 
+    
+      .Icona{
+        width:40px;
+        height:40px;
+        margin-bottom:10px;
+        }
       body { 
             background: #f5f5f5; 
             font-family: Arial, sans-serif;
@@ -489,7 +495,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["message"])) {
             </ul>
      
         <li class='dropdown'>
-        <a href='javascript:void(0)' class='dropbtn'><img class="Icona" src='<?php echo $profilePicture; ?>' alt='Account'></a>
+        <a href='javascript:void(0)' class='dropbtn'><img class="Icona" src='Profilne/<?php echo $profilePicture; ?>' alt='Account'></a>
             <div class='dropdown-content'>
             <?php 
           // Ako korisnik nije prijavljen, prikaži poruku i opciju za prijavu/registraciju  

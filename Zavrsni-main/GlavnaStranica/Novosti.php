@@ -4,15 +4,16 @@
   include("../Login/Spajanje.php");
   include("../Login/Funkcije.php");
   $user_data = check_login($con);
-  $user_data['ImeSlika']; // New field to store the filename of the profile picture
+  $user_data['ImeSlika']; 
   if (!empty($user_data['ImeSlika'])) {
     $profilePicture = "Profilne/" . $user_data['ImeSlika'];
   }  
   else {
-    // If no profile picture, use a default image
-    $profilePicture = "Profilne/user1.png"; // Adjust the path to your default image
+   
+    $profilePicture = "Profilne/user1.png"; 
   }
 
+  mysqli_close($con);
 
 ?>
 <!DOCTYPE html>
@@ -766,6 +767,8 @@
   </div>
   <a href="#black" id="black"></a>
 
+
+
 <!-- Blog Kartica 1 -->
     <div class="containor">
     <div class="blog-card">
@@ -792,6 +795,51 @@
       </p>
     </div>
   </div>
+  <?php 
+    include("../Login/Spajanje.php");
+  $query = "SELECT Izvodac, Datum, ClubLok, Opis, Lokacija, Cijena FROM vjesti";
+
+
+  $result = mysqli_query($con, $query);
+  
+
+  if (mysqli_num_rows($result) > 0) {
+     
+      while ($row = mysqli_fetch_assoc($result)) {
+  
+          echo '
+          <div class="blog-card">
+              <div class="meta">
+                  <div class="photo" style="background-image: url()"></div>
+                  <ul class="details">
+                      <li class="author"><a href="#">' . $row['Izvodac'] . '</a></li>
+                      <li class="date">' . $row['Datum'] . '</li>
+                      <li class="tags">
+                          <ul>
+                              <li><a href="#">Techno</a></li>
+                              <li><a href="#">Hard techno</a></li>
+                              <li><a href="#">Future Techno</a></li>
+                          </ul>
+                      </li>
+                  </ul>
+              </div>
+              <div class="description">
+                  <h1>' . $row['Izvodac'] . '</h1>
+                  <h2>' . $row['ClubLok'] . '</h2>
+                  <p>' . $row['Opis'] . '</p>
+                  <p class="read-more">
+                      <a href="#">Read More</a>
+                  </p>
+              </div>
+          </div>';
+      }
+  } else {
+      echo "No records found"; // Output if there are no records in the database
+  }
+  
+  // Close the database connection
+  mysqli_close($con);
+  ?>
 <!-- Blog Kartica 2 -->
   <div class="blog-card alt">
     <div class="meta">
